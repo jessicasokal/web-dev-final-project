@@ -1,3 +1,6 @@
+import './vendors/bootstrap/css/bootstrap.min.css';
+import './vendors/bootstrap/bootstrap.min.css';
+import './vendors/fontawesome/css/all.min.css';
 import React from 'react';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from './components/home';
