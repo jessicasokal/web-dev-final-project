@@ -11,11 +11,15 @@ import Results from "./components/search-results/results";
 import Profile from "./components/profile";
 import EditProfile from "./components/profile/edit-profile";
 import MyProfile from "./components/profile/my-profile";
+import Navigation from "./components/navigation"
 
 function App() {
   return (
       <BrowserRouter>
           <div className={'container p-5'}>
+              <Navigation>
+
+              </Navigation>
               <div>
                   <Routes>
                       <Route path={'/'}>
