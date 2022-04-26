@@ -1,12 +1,13 @@
 import React from 'react';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from './components/home';
-import Login from "./components/login-registration/login";
-import Register from "./components/login-registration/register";
+import Signin from "./components/login-registration/signin.js";
+import Signup from "./components/login-registration/signup.js";
 import PrivacyPolicy from "./components/privacy-policy";
 import Results from "./components/search-results/results";
-import ProfilePage from "./components/profile";
+import Profile from "./components/profile";
 import EditProfile from "./components/profile/edit-profile";
+import MyProfile from "./components/profile/my-profile";
 
 function App() {
   return (
@@ -17,18 +18,20 @@ function App() {
                       <Route path={'/'}>
                           <Route path={''}
                                  element={<Home/>}/>
-                          <Route path={'login'}
-                                 element={<Login/>}/>
-                          <Route path={'register'}
-                                 element={<Register/>}/>
+                          <Route path={'signin'}
+                                 element={<Signin/>}/>
+                          <Route path={'signup'}
+                                 element={<Signup/>}/>
                           <Route path={'results'}
                                  element={<Results/>}/>
                           <Route path={'privacy-policy'}
                                  element={<PrivacyPolicy/>}/>
-                          <Route path={'profile/'}
-                                 element={<ProfilePage/>}>
+                          <Route path={'profiles/'}
+                                 element={<Profile/>}>
                               <Route path={'edit-profile'}
-                                     element={EditProfile}/>
+                                     element={<EditProfile/>}/>
+                              <Route path={'profile'}
+                                     element={<MyProfile/>}/>
                           </Route>
                       </Route>
                   </Routes>
