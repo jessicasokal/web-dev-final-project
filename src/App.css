@@ -440,3 +440,8 @@ a.wd-navigation-panel-inactive:hover, a.wd-navigation-panel-inactive:visited, a.
 .wd-background-grey {
   background-color: #141617;
 }
+
+.movie-app > .row{
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}

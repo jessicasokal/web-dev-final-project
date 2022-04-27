@@ -12,7 +12,7 @@ import Profile from "./components/profile";
 import EditProfile from "./components/profile/edit-profile";
 import MyProfile from "./components/profile/my-profile";
 import Navigation from "./components/navigation"
-
+import "./App.css"
 function App() {
   return (
       <BrowserRouter>
