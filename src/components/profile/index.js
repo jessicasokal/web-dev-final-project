@@ -46,6 +46,14 @@ const Profile = () => {
 
     useEffect(() => {
         fetchCurrentUser()
+        const interval=setInterval(()=>{
+            fetchCurrentUser()
+        },10000)
+
+
+        return()=>clearInterval(interval)
+
+        // source : https://javascript.plainenglish.io/using-reacts-useeffect-hook-to-fetch-data-and-periodically-refresh-that-data-2a69b6d44081
     }, [])
 
     return (
@@ -102,11 +110,12 @@ const Profile = () => {
                         {currentUser.likedMovies}
                     </div>
                 </div>
+
                 <div className={'col-2'}>
                     <div className={'wd_sidebar'}>Following</div>
-                    {currentUser.followers}
-                    <div className={'wd_sidebar'}>Followers</div>
                     {currentUser.following}
+                    <div className={'wd_sidebar'}>Followers</div>
+                    {currentUser.followers}
                 </div>
                 {JSON.stringify(currentUser)}
             </div>
