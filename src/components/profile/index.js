@@ -17,7 +17,7 @@ const Profile = () => {
             const response = await api.post("http://localhost:4000/api/profile")
             setCurrentUser(response.data)
         } catch (e) {
-            navigate('/')
+            navigate('/signin')
         }
     }
     const editEmail = async (currentUser) => {

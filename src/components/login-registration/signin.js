@@ -18,7 +18,7 @@ const Signin = () => {
             })
             navigate('/profiles/profile')
         } catch (e) {
-            alert('oops')
+            alert(e)
         }
     }
     return (
