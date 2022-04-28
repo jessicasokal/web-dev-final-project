@@ -445,3 +445,10 @@ a.wd-navigation-panel-inactive:hover, a.wd-navigation-panel-inactive:visited, a.
   overflow-x: auto;
   flex-wrap: nowrap;
 }
+
+#container .rounded-list-group li{
+  display: inline-block;
+}
+
+
+

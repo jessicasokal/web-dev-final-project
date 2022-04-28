@@ -1,87 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from "react";
+import Movie from "./movie";
+import "./index.css";
 
-import MovieList from './movie-list';
-import MovieListHeading from './movie-list-heading';
-import SearchBox from './search-box';
-import AddFavourites from './add-favs';
-import RemoveFavourites from './remove-favs';
-
-const HomePage = () => {
-    const [movies, setMovies] = useState([]);
-    const [favourites, setFavourites] = useState([]);
-    const [searchValue, setSearchValue] = useState('');
-
-
-
-    const getMovieRequest = async (searchValue) => {
-        const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=7ba0a1dd`;
-
-        const response = await fetch(url);
-        const responseJson = await response.json();
-
-        if (responseJson.Search) {
-            setMovies(responseJson.Search);
-        }
-    };
-
+const Home = () => {
+    const url =
+        "https://api.themoviedb.org/3/movie/popular?api_key=9e019a5736bc48ae537fdcff22fd8a1e&language=en-US&page=1";
+    const [popular, setPopular] = useState([]);
     useEffect(() => {
-        getMovieRequest(searchValue);
-    }, [searchValue]);
-
-    useEffect(() => {
-        const movieFavourites = JSON.parse(
-            localStorage.getItem('react-movie-app-favourites')
-        );
-
-        if (movieFavourites) {
-            setFavourites(movieFavourites);
-        }
+        fetchPopular();
     }, []);
-
-    const saveToLocalStorage = (items) => {
-        localStorage.setItem('react-movie-app-favourites', JSON.stringify(items));
+    const fetchPopular = async () => {
+        const data = await fetch(url);
+        const movies = await data.json();
+        console.log(movies);
+        setPopular(movies.results);
     };
-
-    const addFavouriteMovie = (movie) => {
-        const newFavouriteList = [...favourites, movie];
-        setFavourites(newFavouriteList);
-        saveToLocalStorage(newFavouriteList);
-    };
-
-    const removeFavouriteMovie = (movie) => {
-        const newFavouriteList = favourites.filter(
-            (favourite) => favourite.imdbID !== movie.imdbID
-        );
-
-        setFavourites(newFavouriteList);
-        saveToLocalStorage(newFavouriteList);
-    };
-
     return (
-        <div className='container-fluid movie-app'>
-            <div className='row d-flex align-items-center mt-4 mb-4'>
-                <MovieListHeading heading='Movies' />
-                <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
-            </div>
-            <div className='row'>
-                <MovieList
-                    movies={movies}
-                    handleFavouritesClick={addFavouriteMovie}
-                    favouriteComponent={AddFavourites}
-                />
-            </div>
-            <div className='row d-flex align-items-center mt-4 mb-4'>
-                <MovieListHeading heading='Favourites' />
-            </div>
-            <div className='row'>
-                <MovieList
-                    movies={favourites}
-                    handleFavouritesClick={removeFavouriteMovie}
-                    favouriteComponent={RemoveFavourites}
-                />
+        <div className="App">
+            <h1>Movies Featured Today</h1>
+            <div className="popular-movies">
+                {popular.map((movie) => {
+                    return <Movie key={movie.id} movie={movie} />;
+                })}
             </div>
         </div>
     );
 };
-
-export default HomePage;
+export default Home;
