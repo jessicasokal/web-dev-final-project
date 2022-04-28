@@ -11,6 +11,7 @@ const Profile = () => {
     const [currentUser, setCurrentUser] = useState({})
     const navigate = useNavigate()
     const emailRef = useRef();
+    const passwordRef = useRef();
     const fetchCurrentUser = async () => {
         try {
             const response = await api.post("http://localhost:4000/api/profile")
@@ -19,14 +20,30 @@ const Profile = () => {
             navigate('/')
         }
     }
-    const editEmail = async (_id, user) => {
+    const editEmail = async (currentUser) => {
         try {
-            await api.put(`http://localhost:4000/api/users/${_id}`, user)
+            await api.put(`http://localhost:4000/api/users/${currentUser._id}`, {
+                ...currentUser,
+                email: emailRef.current.value
+            })
+        } catch (e) {
+            console.log(e)
+        }
+       navigate('/signin')
+    }
+
+    const editPassword = async (currentUser) => {
+        try {
+            await api.put(`http://localhost:4000/api/users/${currentUser._id}`, {
+                ...currentUser,
+                password: passwordRef.current.value
+            })
         } catch (e) {
             console.log(e)
         }
         navigate('/signin')
     }
+
     useEffect(() => {
         fetchCurrentUser()
     }, [])
@@ -47,29 +64,33 @@ const Profile = () => {
                             <span className={'wd_bold'}>
                             Email:
                             </span>
-                            {currentUser.email}
+                             {currentUser.email}
 
                         <input
                                 ref={emailRef}
-                                placeholder="email"
+                                placeholder="New email"
                                 type="email"
                                 className={'ms-3'}
                         />
                         <button
                             className={'btn btn-primary rounded-pill wd_small ms-4'}
-                            onClick={() => editEmail(currentUser._id, {
-                                ...currentUser,
-                                email: emailRef
-                            })}>
+                            onClick={() => editEmail(currentUser)}>
                             Edit
                         </button>
-
-                            <span className={'ps-5'}>
-                                <span className={'wd_bold'}>Password:</span>
+                        </div>
+                        <div className={'ps-5 pt-3'}>
+                                <span className={'wd_bold'}>Password: </span>
                                 {currentUser.password}
-                            </span>
 
-                        <button className={'btn btn-primary rounded-pill wd_small ms-4'}>
+                            <input
+                                ref={passwordRef}
+                                placeholder="New password"
+                                type="text"
+                                className={'ms-3'}
+                            />
+
+                        <button className={'btn btn-primary rounded-pill wd_small ms-4'}
+                        onClick={() => editPassword(currentUser)}>
                             Edit
                         </button>
 
