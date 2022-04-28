@@ -9,6 +9,7 @@ import Profile from "./components/profile";
 import EditProfile from "./components/profile/edit-profile";
 import MyProfile from "./components/profile/my-profile";
 import SecureRoute from "./services/secure-route";
+import Search from './components/search';
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
                       <Route path={'/'}>
                           <Route path={''}
                                  element={<HomePage/>}/>
+                          <Route path={'search'}
+                                 element={<Search/>}/>
                           <Route path={'signin'}
                                  element={<Signin/>}/>
                           <Route path={'signup'}
