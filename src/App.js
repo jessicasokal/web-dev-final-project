@@ -34,12 +34,13 @@ function App() {
                                  element={<Results/>}/>
                           <Route path={'privacy-policy'}
                                  element={<PrivacyPolicy/>}/>
-                          <Route path={'profiles/'}
-                                 element={<Profile/>}>
+                          <Route path={'profiles/'}>
                               <Route path={'edit-profile'}
                                      element={<EditProfile/>}/>
                               <Route path={'profile'}
-                                     element={<MyProfile/>}/>
+                                     element={
+                                             <Profile/>
+                                     }/>
                           </Route>
                       </Route>
                   </Routes>

@@ -1,0 +1,23 @@
+.wd_profile_photo {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
+
+.wd_username {
+    font-weight: bold;
+    font-size: 37px;
+}
+
+.wd_small {
+    width: 100px;
+}
+
+.wd_sidebar {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.wd_bold {
+    font-weight: bold;
+}
