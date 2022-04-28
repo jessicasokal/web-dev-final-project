@@ -1,6 +1,10 @@
+import './vendors/bootstrap/css/bootstrap.min.css';
+import './vendors/bootstrap/bootstrap.min.css';
+import './vendors/fontawesome/css/all.min.css';
 import React from 'react';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import HomePage from './components/home';
+import Home from './components/home';
+import Search from './components/search';
 import Signin from "./components/login-registration/signin.js";
 import Signup from "./components/login-registration/signup.js";
 import PrivacyPolicy from "./components/privacy-policy";
@@ -8,18 +12,18 @@ import Results from "./components/search-results/results";
 import Profile from "./components/profile";
 import EditProfile from "./components/profile/edit-profile";
 import MyProfile from "./components/profile/my-profile";
-import SecureRoute from "./services/secure-route";
-import Search from './components/search';
-
+import Navigation from "./components/navigation"
+import "./App.css"
 function App() {
   return (
       <BrowserRouter>
           <div className={'container p-5'}>
+              <Navigation></Navigation>
               <div>
                   <Routes>
                       <Route path={'/'}>
                           <Route path={''}
-                                 element={<HomePage/>}/>
+                                 element={<Home/>}/>
                           <Route path={'search'}
                                  element={<Search/>}/>
                           <Route path={'signin'}
