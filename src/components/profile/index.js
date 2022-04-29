@@ -3,6 +3,8 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import './profile.css';
 
+
+
 const api = axios.create({
     withCredentials: true
 });
@@ -46,12 +48,7 @@ const Profile = () => {
 
     useEffect(() => {
         fetchCurrentUser()
-        const interval=setInterval(()=>{
-            fetchCurrentUser()
-        },10000)
 
-
-        return()=>clearInterval(interval)
 
         // source : https://javascript.plainenglish.io/using-reacts-useeffect-hook-to-fetch-data-and-periodically-refresh-that-data-2a69b6d44081
     }, [])

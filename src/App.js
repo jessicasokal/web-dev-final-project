@@ -10,8 +10,7 @@ import Signup from "./components/login-registration/signup.js";
 import PrivacyPolicy from "./components/privacy-policy";
 import Results from "./components/search-results/results";
 import Profile from "./components/profile";
-import EditProfile from "./components/profile/edit-profile";
-import MyProfile from "./components/profile/my-profile";
+import OtherProfile from "./components/profile/other-profile";
 import Navigation from "./components/navigation"
 import "./App.css"
 
@@ -35,14 +34,14 @@ function App() {
                                  element={<Results/>}/>
                           <Route path={'privacy-policy'}
                                  element={<PrivacyPolicy/>}/>
-                          <Route path={'profiles/'}>
-                              <Route path={'edit-profile'}
-                                     element={<EditProfile/>}/>
-                              <Route path={'profile'}
-                                     element={
-                                             <Profile/>
-                                     }/>
-                          </Route>
+                          <Route path={'profile/'}>
+                              <Route>
+                                  <Route path='' element={
+                                  <Profile/>}/>
+                              </Route>
+                                <Route path={':id'}
+                                   element={<OtherProfile/>}/>
+                                </Route>
                       </Route>
                   </Routes>
               </div>

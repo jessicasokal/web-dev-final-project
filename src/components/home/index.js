@@ -3,6 +3,7 @@ import Movie from "./movie";
 import "./index.css";
 import axios from "axios";
 import UserTile from "./user-tile";
+import LOGGED_IN from '../login-registration/signin.js';
 
 const api = axios.create({
     withCredentials: false
@@ -13,6 +14,7 @@ const Home = () => {
         "https://api.themoviedb.org/3/movie/popular?api_key=9e019a5736bc48ae537fdcff22fd8a1e&language=en-US&page=1";
     const [popular, setPopular] = useState([]);
     const [users, setUsers] = useState([]);
+    const [currentUser, setCurrentUser] = useState({})
 
     useEffect(() => {
         fetchPopular();
@@ -20,6 +22,10 @@ const Home = () => {
 
     useEffect(() => {
         fetchUsers();
+    }, []);
+
+    useEffect(() => {
+        fetchCurrentUser();
     }, []);
 
     const fetchPopular = async () => {
@@ -38,10 +44,22 @@ const Home = () => {
         }
     };
 
+    const fetchCurrentUser = async () => {
+        try {
+            const response = await api.post("http://localhost:4000/api/profile")
+            setCurrentUser(response.data)
+        } catch (e) {
+            // no user logged in
+        }
+    }
+
     return (
         <div className="App">
             <div className={'row'}>
                 <div className={'col-9'}>
+                    {
+                        LOGGED_IN && <div>{currentUser.username}</div>
+                    }
                     <h1>Movies Featured Today</h1>
                     <div className="popular-movies">
                         {popular.map((movie) => {
@@ -53,7 +71,7 @@ const Home = () => {
                     <div>
                         <h4>Recently Joined</h4>
                         <ul className={'list-group'}>
-                            {users.map((user) => <UserTile user={user}/>)}
+                            {users.reverse().map((user) => <UserTile user={user}/>)}
                         </ul>
                     </div>
                 </div>

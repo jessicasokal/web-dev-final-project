@@ -6,6 +6,8 @@ const api = axios.create({
     withCredentials: true
 });
 
+export let LOGGED_IN = false;
+
 const Signin = () => {
     const usernameRef = useRef()
     const passwordRef = useRef()
@@ -16,6 +18,7 @@ const Signin = () => {
                 username: usernameRef.current.value,
                 password: passwordRef.current.value
             })
+            LOGGED_IN = true;
             navigate('/profiles/profile')
         } catch (e) {
             alert(e)
