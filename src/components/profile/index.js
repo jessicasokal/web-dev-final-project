@@ -55,7 +55,7 @@ const Profile = () => {
 
     return (
         <div>
-            <h1>My Profile</h1>
+            <h1 className={'mt-4'}>My Profile</h1>
             <div className={'row'}>
                 <div className={'col-10'}>
                     <div className={'row'}>

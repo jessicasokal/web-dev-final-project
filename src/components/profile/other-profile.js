@@ -27,7 +27,7 @@ const OtherProfile = () => {
     };
     return(
         <div>
-            <h1>User Profile</h1>
+            <h1 className={'mt-4'}>User Profile</h1>
             <div className={'row'}>
                 <div className={'col-10'}>
                     <div className={'row'}>
