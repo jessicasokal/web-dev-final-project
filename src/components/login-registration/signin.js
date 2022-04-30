@@ -19,7 +19,7 @@ const Signin = () => {
                 password: passwordRef.current.value
             })
             LOGGED_IN = true;
-            navigate('/profiles/profile')
+            navigate('/profile')
         } catch (e) {
             alert(e)
         }

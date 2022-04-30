@@ -60,7 +60,6 @@ const Profile = () => {
                 <div className={'col-10'}>
                     <div className={'row'}>
                     <span className={'wd_username'}>@{currentUser.username}
-                        <button className={'btn btn-primary rounded-pill wd_small ms-4'}>Follow</button>
                     </span>
                     </div>
 
