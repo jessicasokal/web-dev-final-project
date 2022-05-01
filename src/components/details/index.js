@@ -14,7 +14,7 @@ const DetailsPage = () => {
     const [currentMovie, setCurrentMovie] = useState();
 
     const url =
-        "https://api.themoviedb.org/3/movie/popular?api_key=9e019a5736bc48ae537fdcff22fd8a1e&language=en-US&page=1";
+        "https://api.themoviedb.org/3/movie/upcoming?api_key=9e019a5736bc48ae537fdcff22fd8a1e&language=en-US&page=1";
 
     useEffect(() => {
         fetchCurrentMovie();
