@@ -4,7 +4,6 @@ import "./index.css";
 import axios from "axios";
 import UserTile from "./user-tile";
 import isLoggedIn from "../../global/variables";
-import Signout from "../login-registration/signout";
 
 const api = axios.create({
     withCredentials: false
@@ -55,7 +54,7 @@ const Home = () => {
     }
 
     return (
-        <div className="App">
+        <div className="App mt-5">
             <div className={'row'}>
                 <div className={'col-9'}>
                     {
@@ -70,7 +69,6 @@ const Home = () => {
                 </div>
                 <div className={'col-3'}>
                     <div>
-                        <Signout/>
                         <h4>Recently Joined</h4>
                         <ul className={'list-group'}>
                             {users.reverse().map((user) => <UserTile user={user}/>)}

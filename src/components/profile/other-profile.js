@@ -1,18 +1,19 @@
 import React, {useEffect, useState} from "react";
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
-import UserTile from "../home/user-tile";
-
+import './profile.css';
 
 const api = axios.create({
     withCredentials: false
 });
 
+
 const OtherProfile = () => {
     let location = useLocation().pathname;
     const textArray = location.split('/');
-    const [user, setUser] = useState([]);
     const userId = textArray[2];
+
+    const [user, setUser] = useState([]);
 
     useEffect(() => {
         fetchUser();
@@ -23,38 +24,60 @@ const OtherProfile = () => {
             const response = await api.get(`http://localhost:4000/api/users/${userId}`)
             setUser(response.data)
         } catch (e) {
-            alert(e)
+            console.log(e)
         }
     };
+
+    const [currentUser, setCurrentUser] = useState({})
+
+    useEffect(() => {
+        fetchCurrentUser()
+    }, [])
+
+    const fetchCurrentUser = async () => {
+        try {
+            const response = await api.post("http://localhost:4000/api/profile")
+            setCurrentUser(response.data)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+
     return(
-        <div>
-            <h1 className={'mt-4'}>User Profile</h1>
-            <div className={'row'}>
-                <div className={'col-10'}>
-                    <div className={'row'}>
-                    <span className={'wd_username'}>@{user.username}
-                        <button className={'btn btn-primary rounded-pill wd_small ms-4'}
-                        >Follow</button>
-                    </span>
-                    </div>
+        <div className={'row'}>
+            <div className={'col-5 mt-4 wd-background-grey'}>
+                <div className={'p-2 m-2'}>
+                    <h4>Liked Movies</h4>
+                </div>
+            </div>
 
-                    <div className={'row mt-3'}>
-                        <div>
-                            <span className={'wd_bold'}>
-                            Email:
-                            </span>
-                            {user.email}
-
+            <div className={'col-7'}>
+                <div className={'p-2 m-2'}>
+                        <div className={'col-8'}>
+                            <h2>User Profile</h2>
                         </div>
 
+                    <div className={'col-10'}>
+                        <div className={'row'}>
+                                <span className={'wd_username'}>@{user.username}
+                                    </span>
+                        </div>
+
+                        <div className={'wd_bold mt-2'}>
+                            Contact: {user.email}
+                        </div>
 
                     </div>
-                    <div className={'row'}>
-                        <div className={'pt-5 wd_sidebar'}>Liked Movies</div>
-                        {user.likedMovies}
+
+                    <div className={'pt-4'}>
+                        <h3>Following</h3>
+
+
+                        <h3>Followers</h3>
+                        {user.followers}
                     </div>
                 </div>
-
             </div>
 
         </div>

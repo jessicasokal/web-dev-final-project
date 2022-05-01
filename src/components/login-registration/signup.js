@@ -26,8 +26,8 @@ const Signup = () => {
         }
     }
     return (
-        <div className={'row'}>
-            <h1 className={'pt-4'}>Signup</h1>
+        <div className={'row pt-4'}>
+            <h1>Signup</h1>
             <div className={'col-4 p-2'}>
                 <label>
                     <input

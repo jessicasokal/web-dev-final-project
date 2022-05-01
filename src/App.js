@@ -13,6 +13,8 @@ import Profile from "./components/profile";
 import OtherProfile from "./components/profile/other-profile";
 import Navigation from "./components/navigation"
 import "./App.css"
+import AdminUse from "./components/admin/admin-use";
+import DetailsPage from "./components/details/index.js";
 
 function App() {
   return (
@@ -34,6 +36,10 @@ function App() {
                                  element={<Results/>}/>
                           <Route path={'privacy-policy'}
                                  element={<PrivacyPolicy/>}/>
+                          <Route path={'adminonly'}
+                                 element={<AdminUse/>}/>
+                          <Route path={'details/:id'}
+                                 element={<DetailsPage/>}/>
                           <Route path={'profile/'}>
                               <Route>
                                   <Route path='' element={

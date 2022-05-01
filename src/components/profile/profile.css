@@ -21,3 +21,7 @@
 .wd_bold {
     font-weight: bold;
 }
+
+.wd-background-grey {
+    border-color: grey;
+}

@@ -2,9 +2,9 @@ import React, {useEffect, useRef, useState} from 'react';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import './profile.css';
-import FollowingFollowersSidebar from "./following_followers_sizebar";
 import isLoggedIn from "../../global/variables";
-
+import FollowingFollowersSidebar from "./following_followers_sizebar";
+import Signout from "../login-registration/signout";
 
 const api = axios.create({
     withCredentials: true
@@ -19,10 +19,14 @@ const Profile = () => {
     }
 
     const [currentUser, setCurrentUser] = useState({})
+    const following = currentUser.following;
 
     const emailRef = useRef();
     const passwordRef = useRef();
 
+    useEffect(() => {
+        fetchCurrentUser()
+    }, [])
 
     const fetchCurrentUser = async () => {
         try {
@@ -32,6 +36,7 @@ const Profile = () => {
             navigate('/signin')
         }
     }
+
     const editEmail = async (currentUser) => {
         try {
             await api.put(`http://localhost:4000/api/users/${currentUser._id}`, {
@@ -56,73 +61,80 @@ const Profile = () => {
         navigate('/signin')
     }
 
-    useEffect(() => {
-        fetchCurrentUser()
-    }, [])
 
     return (
         isLoggedIn.LOGGED_IN &&
-        <div>
-            <h1 className={'mt-4'}>My Profile</h1>
-            <div className={'row'}>
-                <div className={'col-10'}>
-                    <div className={'row'}>
-                    <span className={'wd_username'}>@{currentUser.username}
-                    </span>
-                    </div>
+       <div className={'row'}>
+           <div className={'col-5 mt-4 wd-background-grey'}>
+               <div className={'p-2 m-2'}>
+                   <h4>Liked Movies</h4>
+               </div>
+           </div>
 
-                    <div className={'row mt-3'}>
-                        <div>
-                            <span className={'wd_bold'}>
-                            Email:
-                            </span>
-                             {currentUser.email}
+           <div className={'col-7'}>
+               <div className={'p-2 m-2'}>
+                   <div className={'row mt-4'}>
+                       <div className={'col-8'}>
+                           <h2>My Profile</h2>
+                       </div>
+                       <div className={'col-4 mt-2'}>
+                           <Signout/>
+                       </div>
+                   </div>
 
-                        <input
-                                ref={emailRef}
-                                placeholder="New email"
-                                type="email"
-                                className={'ms-3'}
-                        />
-                        <button
-                            className={'btn btn-primary rounded-pill wd_small ms-4'}
-                            onClick={() => editEmail(currentUser)}>
-                            Edit
-                        </button>
-                        </div>
-                        <div className={'ps-5 pt-3'}>
-                                <span className={'wd_bold'}>Password: </span>
-                                {currentUser.password}
+                       <div className={'col-10'}>
+                           <div className={'row'}>
+                                <span className={'wd_username'}>@{currentUser.username}
+                                    </span>
+                           </div>
 
-                            <input
-                                ref={passwordRef}
-                                placeholder="New password"
-                                type="text"
-                                className={'ms-3'}
-                            />
+                            <div className={'wd_bold mt-2'}>
+                            Email: {currentUser.email}
+                            </div>
 
-                        <button className={'btn btn-primary rounded-pill wd_small ms-4'}
-                        onClick={() => editPassword(currentUser)}>
-                            Edit
-                        </button>
+                           <div>
+                               <input
+                                   ref={emailRef}
+                                   placeholder="New email"
+                                   type="email"
+                               />
+                               <button
+                                   className={'btn btn-primary rounded-pill wd_small ms-4'}
+                                   onClick={() => editEmail(currentUser)}>
+                                   Edit
+                               </button>
+                           </div>
 
-                        </div>
+                           <div className={'wd_bold mt-2'}>
+                               Password: {currentUser.password}
+                           </div>
 
-                    </div>
-                    <div className={'row'}>
-                        <div className={'pt-5 wd_sidebar'}>Liked Movies</div>
-                        {currentUser.likedMovies}
-                    </div>
+                           <div>
+                               <input
+                                   ref={passwordRef}
+                                   placeholder="New password"
+                                   type="text"
+                               />
 
-                </div>
-                {JSON.stringify(currentUser)}
-            </div>
-        <br/>
-            <br/>
-            <br/>
-            <br/>
+                               <button className={'btn btn-primary rounded-pill wd_small ms-4'}
+                                       onClick={() => editPassword(currentUser)}>
+                                   Edit
+                               </button>
+                           </div>
+                       </div>
 
+                   <div className={'pt-4'}>
+                       <h3>Following</h3>
+
+
+                       <h3>Followers</h3>
+                       {currentUser.followers}
+                   </div>
+               </div>
         </div>
+
+       </div>
+
     );
 };
 
@@ -133,4 +145,7 @@ export default Profile;
                     {console.log(`CURRENT USER: ${currentUser._id}`)}
                     <FollowingFollowersSidebar userID={currentUser._id}/>
                 </div>
+
+
+                {JSON.stringify(currentUser)}
  */
