@@ -18,6 +18,11 @@ const NavigationSidebar = () => {
                 <span className="me-3"><i className="fas fa-solid fa-house-chimney"></i></span>
                 <span className="d-none d-xl-block" >Search</span>
             </Link>
+            { isLoggedIn.LOGGED_IN && <Link to="/upcoming"
+                  className={`d-flex list-group-item list-group-item-action ${pathname === '/search' ? 'active' : ''}`}>
+                <span className="me-3"><i className="fas fa-solid fa-house-chimney"></i></span>
+                <span className="d-none d-xl-block" >Upcoming</span>
+            </Link>}
             <Link to="/signin"
                   className={`d-flex list-group-item list-group-item-action ${pathname === '/signin' ? 'active' : ''}`}>
                 <span className="me-3"><i className="fas fa-solid fa-house-chimney"></i></span>

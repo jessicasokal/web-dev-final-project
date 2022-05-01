@@ -15,6 +15,7 @@ import Navigation from "./components/navigation"
 import "./App.css"
 import AdminUse from "./components/admin/admin-use";
 import DetailsPage from "./components/details/index.js";
+import Upcoming from "./components/upcoming";
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
                                  element={<Home/>}/>
                           <Route path={'search'}
                                  element={<Search/>}/>
+                          <Route path={'upcoming'}
+                                 element={<Upcoming/>}/>
                           <Route path={'signin'}
                                  element={<Signin/>}/>
                           <Route path={'signup'}
