@@ -1,12 +1,11 @@
 import React, {useRef} from 'react';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import isLoggedIn from "../../global/variables";
 
 const api = axios.create({
     withCredentials: true
 });
-
-export let LOGGED_IN = false;
 
 const Signin = () => {
     const usernameRef = useRef()
@@ -18,7 +17,7 @@ const Signin = () => {
                 username: usernameRef.current.value,
                 password: passwordRef.current.value
             })
-            LOGGED_IN = true;
+            isLoggedIn.makeTrue();
             navigate('/profile')
         } catch (e) {
             alert(e)

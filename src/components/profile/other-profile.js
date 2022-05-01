@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 import axios from "axios";
+import UserTile from "../home/user-tile";
 
 
 const api = axios.create({
@@ -54,21 +55,12 @@ const OtherProfile = () => {
                     </div>
                 </div>
 
-                <div className={'col-2'}>
-                    <div className={'wd_sidebar'}>Following</div>
-                    {user.following}
-                    <div className={'wd_sidebar'}>Followers</div>
-                    {user.followers}
-                </div>
-                {JSON.stringify(user)}
             </div>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
 
         </div>
     )
 }
 
 export default OtherProfile;
+
+// {JSON.stringify(user)}

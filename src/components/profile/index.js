@@ -2,18 +2,28 @@ import React, {useEffect, useRef, useState} from 'react';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import './profile.css';
-
+import FollowingFollowersSidebar from "./following_followers_sizebar";
+import isLoggedIn from "../../global/variables";
 
 
 const api = axios.create({
     withCredentials: true
 });
 
+
 const Profile = () => {
-    const [currentUser, setCurrentUser] = useState({})
     const navigate = useNavigate()
+
+    if (!isLoggedIn.LOGGED_IN) {
+        navigate('/signin')
+    }
+
+    const [currentUser, setCurrentUser] = useState({})
+
     const emailRef = useRef();
     const passwordRef = useRef();
+
+
     const fetchCurrentUser = async () => {
         try {
             const response = await api.post("http://localhost:4000/api/profile")
@@ -48,12 +58,10 @@ const Profile = () => {
 
     useEffect(() => {
         fetchCurrentUser()
-
-
-        // source : https://javascript.plainenglish.io/using-reacts-useeffect-hook-to-fetch-data-and-periodically-refresh-that-data-2a69b6d44081
     }, [])
 
     return (
+        isLoggedIn.LOGGED_IN &&
         <div>
             <h1 className={'mt-4'}>My Profile</h1>
             <div className={'row'}>
@@ -105,13 +113,7 @@ const Profile = () => {
                         <div className={'pt-5 wd_sidebar'}>Liked Movies</div>
                         {currentUser.likedMovies}
                     </div>
-                </div>
 
-                <div className={'col-2'}>
-                    <div className={'wd_sidebar'}>Following</div>
-                    {currentUser.following}
-                    <div className={'wd_sidebar'}>Followers</div>
-                    {currentUser.followers}
                 </div>
                 {JSON.stringify(currentUser)}
             </div>
@@ -126,3 +128,9 @@ const Profile = () => {
 
 export default Profile;
 
+/*
+                <div className={'col-2'}>
+                    {console.log(`CURRENT USER: ${currentUser._id}`)}
+                    <FollowingFollowersSidebar userID={currentUser._id}/>
+                </div>
+ */

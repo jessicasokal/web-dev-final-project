@@ -26,57 +26,172 @@ const Signup = () => {
         }
     }
     return (
-        <div>
-            <h1>Signup</h1>
-            <div>
-                <input
-                    ref={adminRef}
-                    type="radio"
-                    className="form-control"
-                    value={'admin'}
-                    id={'admin'}
-                    name={'typeOfUser'}
-                />
-                <label htmlFor={'admin'}>Admin</label>
+        <div className={'row'}>
+            <h1 className={'pt-4'}>Signup</h1>
+            <div className={'col-4 p-2'}>
+                <label>
+                    <input
+                        ref={adminRef}
+                        type="radio"
+                        className="form-control"
+                        value={'admin'}
+                        id={'admin'}
+                        name={'typeOfUser'}
+                    />
+                    Admin
+                </label>
 
-                <input
-                    ref={watcherRef}
-                    type="radio"
-                    className="form-control"
-                    value={'watcher'}
-                    id={'watcher'}
-                    name={'typeOfUser'}
-                />
-                <label htmlFor={'watcher'}>Movie Watcher</label>
+                <label>
+                    <input
+                        ref={watcherRef}
+                        type="radio"
+                        className="form-control"
+                        value={'watcher'}
+                        id={'watcher'}
+                        name={'typeOfUser'}
+                    />
+                    Movie Watcher
+                </label>
 
-                <input
-                    ref={creatorRef}
-                    type="radio"
-                    className="form-control"
-                    value={'creator'}
-                    id={'creator'}
-                    name={'typeOfUser'}
-                />
-                <label htmlFor={'creator'}>Movie Creator</label>
+                <label>
+                    <input
+                        ref={creatorRef}
+                        type="radio"
+                        className="form-control"
+                        value={'creator'}
+                        id={'creator'}
+                        name={'typeOfUser'}
+                    />
+                    Movie Creator
+                </label>
+
             </div>
 
-            <input ref={emailRef}
-                   placeholder="email"
-                   type="email"
-                   className="form-control"/>
-            <input ref={usernameRef}
-                   placeholder="username"
-                   type="text"
-                   className="form-control"/>
-            <input ref={passwordRef}
-                   placeholder="password"
-                   type="password"
-                   className="form-control"/>
-            <button onClick={handleSignupBtn}
-                    className="btn btn-primary">
-                Signup</button>
+            <div className={'col-8'}>
+                <div className={'row pt-4'}>
+                    <div className={'col-2'}>
+                        <h5>Email:</h5>
+                    </div>
+                    <div className={'col-10'}>
+                        <input ref={emailRef}
+                               placeholder="email"
+                               type="email"
+                               className="form-control"/>
+                    </div>
+                </div>
+
+                <div className={'row pt-2'}>
+                    <div className={'col-2'}>
+                        <h5>Username:</h5>
+                    </div>
+                    <div className={'col-10'}>
+                        <input ref={usernameRef}
+                               placeholder="username"
+                               type="text"
+                               className="form-control"/>
+                    </div>
+                </div>
+
+                <div className={'row pt-2'}>
+                    <div className={'col-2'}>
+                        <h5>
+                            Password:
+                        </h5>
+                    </div>
+                    <div className={'col-10'}>
+                        <input ref={passwordRef}
+                               placeholder="password"
+                               type="password"
+                               className="form-control"/>
+                    </div>
+                </div>
+
+                <div className={'pt-4'}>
+                    <button onClick={handleSignupBtn}
+                            className="btn btn-primary">
+                        Signup</button>
+                </div>
+
+            </div>
         </div>
     );
 };
 
 export default Signup;
+
+/*
+
+                <label>
+                    <input
+                        ref={adminRef}
+                        type="radio"
+                        className="form-control"
+                        value={'admin'}
+                        id={'admin'}
+                        name={'typeOfUser'}
+                    />
+                    Admin
+                </label>
+
+                <label>
+                    <input
+                        ref={watcherRef}
+                        type="radio"
+                        className="form-control"
+                        value={'watcher'}
+                        id={'watcher'}
+                        name={'typeOfUser'}
+                    />
+                    Movie Watcher
+                </label>
+
+                <label>
+                    <input
+                        ref={creatorRef}
+                        type="radio"
+                        className="form-control"
+                        value={'creator'}
+                        id={'creator'}
+                        name={'typeOfUser'}
+                    />
+                    Movie Creator
+                </label>
+ */
+
+/*
+
+                <h4>User Type</h4>
+                <select className={'dropdown'}>
+                    <option
+                        ref={adminRef}
+                        type="radio"
+                        className="form-control"
+                        value={'admin'}
+                        id={'admin'}
+                        name={'typeOfUser'}
+                    >
+                        Admin
+                    </option>
+
+                    <option
+                        ref={watcherRef}
+                        type="radio"
+                        className="form-control"
+                        value={'watcher'}
+                        id={'watcher'}
+                        name={'typeOfUser'}>
+                        Movie Watcher
+                    </option>
+
+                    <option
+                            ref={creatorRef}
+                            type="radio"
+                            className="form-control"
+                            value={'creator'}
+                            id={'creator'}
+                            name={'typeOfUser'}
+                            >
+                        Movie Creator
+                    </option>
+                </select>
+ */

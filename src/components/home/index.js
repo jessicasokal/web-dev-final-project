@@ -3,7 +3,8 @@ import Movie from "./movie";
 import "./index.css";
 import axios from "axios";
 import UserTile from "./user-tile";
-import LOGGED_IN from '../login-registration/signin.js';
+import isLoggedIn from "../../global/variables";
+import Signout from "../login-registration/signout";
 
 const api = axios.create({
     withCredentials: false
@@ -58,7 +59,7 @@ const Home = () => {
             <div className={'row'}>
                 <div className={'col-9'}>
                     {
-                        LOGGED_IN && <div>{currentUser.username}</div>
+                        isLoggedIn.LOGGED_IN && <div>{currentUser.username}</div>
                     }
                     <h1>Movies Featured Today</h1>
                     <div className="popular-movies">
@@ -69,6 +70,7 @@ const Home = () => {
                 </div>
                 <div className={'col-3'}>
                     <div>
+                        <Signout/>
                         <h4>Recently Joined</h4>
                         <ul className={'list-group'}>
                             {users.reverse().map((user) => <UserTile user={user}/>)}
