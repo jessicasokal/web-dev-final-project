@@ -4,9 +4,10 @@ import "./index.css";
 import axios from "axios";
 import UserTile from "./user-tile";
 import isLoggedIn from "../../global/variables";
+import {Link} from "react-router-dom";
 
 const api = axios.create({
-    withCredentials: false
+    withCredentials: true
 });
 
 const Home = () => {
@@ -54,22 +55,42 @@ const Home = () => {
     }
 
     return (
-        <div className="App mt-5">
+        <div className="mt-5">
             <div className={'row'}>
                 <div className={'col-9'}>
                     {
-                        isLoggedIn.LOGGED_IN && <div>{currentUser.username}</div>
+                        isLoggedIn.LOGGED_IN &&
+                            <div>
+                                <h1>My Likes</h1>
+                                {JSON.stringify(currentUser.likedMovies)}
+                            </div>
                     }
+
                     <h1>Movies Featured Today</h1>
                     <div className="popular-movies">
                         {popular.map((movie) => {
-                            return <Movie key={movie.id} movie={movie} />;
+                            return <Link to={`/details/${movie.id}`}>
+                                <Movie key={movie.id} movie={movie} />
+                            </Link>;
                         })}
                     </div>
                 </div>
                 <div className={'col-3'}>
                     <div>
-                        <h4>Recently Joined</h4>
+                        {
+                            isLoggedIn.LOGGED_IN &&
+                        <div className={'row'}>
+                            <div className={'col-3 pt-3 ps-3 pe-3'}>
+                                <img src={'./images/default-user-image.png'} className={'wd-profile-picture'}/>
+                            </div>
+                            <div className={'col-9 pt-3 ps-3 pe-3'}>
+                                <h3>{`@${currentUser.username}`}</h3>
+                            </div>
+                            <hr className={'m-2'}/>
+                        </div>
+                        }
+
+                        <h4 className={'mt-2'}>Recently Joined</h4>
                         <ul className={'list-group'}>
                             {users.reverse().map((user) => <UserTile user={user}/>)}
                         </ul>

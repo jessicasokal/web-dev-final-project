@@ -4,7 +4,7 @@ import axios from "axios";
 import './profile.css';
 
 const api = axios.create({
-    withCredentials: false
+    withCredentials: true
 });
 
 

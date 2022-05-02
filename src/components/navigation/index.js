@@ -1,10 +1,30 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Link, useLocation } from 'react-router-dom';
 import {StyleSheet} from "react-native";
 import isLoggedIn from "../../global/variables";
+import axios from "axios";
+
+const api = axios.create({
+    withCredentials: true
+});
 
 const NavigationSidebar = () => {
     const {pathname} = useLocation();
+
+    const [currentUser, setCurrentUser] = useState({})
+
+    useEffect(() => {
+        fetchCurrentUser();
+    }, []);
+
+    const fetchCurrentUser = async () => {
+        try {
+            const response = await api.post("http://localhost:4000/api/profile")
+            setCurrentUser(response.data)
+        } catch (e) {
+            // no user logged in
+        }
+    }
 
     return(
         <div className="rounded list-group list-group-horizontal" style={{ width: "25%", paddingTop: 20}}>
@@ -38,19 +58,15 @@ const NavigationSidebar = () => {
                 <span className="me-3"><i className="fas fa-solid fa-house-chimney"></i></span>
                 <span className="d-none d-xl-block">Profile</span>
             </Link>
-            { isLoggedIn.LOGGED_IN && <Link to="/adminonly"
+            {console.log(currentUser)}
+            { currentUser.isAdmin && isLoggedIn.LOGGED_IN && <Link to="/adminonly"
                   className={`d-flex list-group-item list-group-item-action ${pathname === '/adminonly' ? 'active' : ''}`}>
                 <span className="me-3"><i className="fas fa-solid fa-house-chimney"></i></span>
-                <span className="d-none d-xl-block">Admin Use</span>
+                <span className="d-none d-xl-block">Admin</span>
             </Link> }
         </div>
     );
 }
 
-// const styles = StyleSheet.create({
-//      login:{
-//          width: 50
-//     }
-// })
 export default NavigationSidebar;
 

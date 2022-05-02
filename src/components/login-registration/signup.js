@@ -2,6 +2,10 @@ import React, {useRef} from 'react';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 
+const api = axios.create({
+    withCredentials: true
+});
+
 const Signup = () => {
     const adminRef = useRef()
     const watcherRef = useRef()
@@ -12,7 +16,7 @@ const Signup = () => {
     const navigate = useNavigate()
     const handleSignupBtn = async () => {
         try {
-            await axios.post("http://localhost:4000/api/signup", {
+            await api.post("http://localhost:4000/api/signup", {
                 isAdmin: adminRef.current.checked,
                 isWatcher: watcherRef.current.checked,
                 isCreator: creatorRef.current.checked,

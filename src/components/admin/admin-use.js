@@ -3,7 +3,7 @@ import User from "./user";
 
 import axios from "axios";
 const api = axios.create({
-    withCredentials: false
+    withCredentials: true
 });
 
 const AdminUse = () => {
