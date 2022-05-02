@@ -8,7 +8,7 @@ const DetailsPage = () => {
     const [currMovie, setMovie] = useState();
 
     const url =
-        `https://api.themoviedb.org/3/movie/${movieID}?api_key=9e019a5736bc48ae537fdcff22fd8a1e&language=en-US&page=1`;
+        `https://api.themoviedb.org/3/movie/${movieID}?api_key=9e019a5736bc48ae537fdcff22fd8a1e`;
 
     useEffect(() => {
         fetchMovie();
@@ -19,13 +19,18 @@ const DetailsPage = () => {
         const movie = await data.json();
         setMovie(movie)
         console.log('setting movie')
+
     };
 
     return (
         <div className={'row'}>
             <div className={'col-3'}>
                 {currMovie.title}
-                {JSON.stringify(currMovie)}
+                {currMovie.overview}
+                {currMovie.popularity}
+                {currMovie.status}
+                {currMovie.tagline}
+                {currMovie.vote_count}
             </div>
         </div>
     )
