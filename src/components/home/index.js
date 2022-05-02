@@ -4,7 +4,7 @@ import "./index.css";
 import axios from "axios";
 import UserTile from "./user-tile";
 import isLoggedIn from "../../global/variables";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 const api = axios.create({
     withCredentials: true
@@ -16,6 +16,7 @@ const Home = () => {
     const [popular, setPopular] = useState([]);
     const [users, setUsers] = useState([]);
     const [currentUser, setCurrentUser] = useState({})
+    const navigate = useNavigate()
 
     useEffect(() => {
         fetchPopular();
@@ -54,6 +55,18 @@ const Home = () => {
         }
     }
 
+    const addLike = async ({liked}) => {
+        try {
+            await api.put(`http://localhost:4000/api/users/${currentUser._id}`, {
+                ...currentUser,
+                likedMovies: [...currentUser.likedMovies, liked]
+            })
+        } catch (e) {
+            console.log(e)
+        }
+        navigate('/signin')
+    }
+
     return (
         <div className="mt-5">
             <div className={'row'}>
@@ -69,9 +82,26 @@ const Home = () => {
                     <h1>Movies Featured Today</h1>
                     <div className="popular-movies">
                         {popular.map((movie) => {
-                            return <Link to={`/details/${movie.id}`}>
-                                <Movie key={movie.id} movie={movie} />
-                            </Link>;
+
+                            return <div>
+                                <Link to={`/details/${movie.id}`}>
+                                    <Movie key={movie.id} movie={movie} />
+                                </Link>
+                                {
+                                    isLoggedIn.LOGGED_IN &&
+                                        <button className={'btn btn-primary'}
+                                        onClick={() => addLike(movie.id)}>
+                                            Like
+                                        </button>
+                                }
+                                {
+                                    !isLoggedIn.LOGGED_IN &&
+                                    <button className={'btn btn-primary'}
+                                            onClick={() => navigate('/signin')}>
+                                        Like
+                                    </button>
+                                }
+                            </div>
                         })}
                     </div>
                 </div>
