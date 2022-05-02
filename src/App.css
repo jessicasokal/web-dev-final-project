@@ -402,12 +402,37 @@ a.wd-navigation-panel-inactive:hover, a.wd-navigation-panel-inactive:visited, a.
   background-color: #141617;
 }
 
-.movie-app > .row{
-  overflow-x: auto;
-  flex-wrap: nowrap;
-}
+
 
 #container .rounded-list-group li{
   display: inline-block;
 }
 
+
+.image-container {
+  position: relative;
+  transition: transform 0.2s;
+  width:300px;
+  height: 300px;
+}
+
+.image-container:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.image-container:hover .overlay {
+  opacity: 1;
+}
+
+.overlay {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  transition: 0.5s ease;
+  opacity: 0;
+  bottom: 0;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
+}
