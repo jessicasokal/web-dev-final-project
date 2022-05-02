@@ -30,17 +30,17 @@ const Signin = () => {
                 ref={usernameRef}
                 placeholder="username"
                 type="text"
-                className="form-control"
+                className="form-control m-3"
             />
             <input
                 ref={passwordRef}
                 placeholder="password"
                 type="password"
-                className="form-control"
+                className="form-control m-3"
             />
             <button
                 onClick={handleSigninBtn}
-                className="btn btn-primary">
+                className="btn btn-primary m-2 ms-3">
                 Signin
             </button>
         </div>
