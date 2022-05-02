@@ -63,7 +63,7 @@ const Home = () => {
                     <h1>Upcoming Movies</h1>
                     <div className="popular-movies">
                         {popular.map((movie) => {
-                            return <Movie key={movie.id} movie={movie} />;
+                            return <Movie key={movie.id} movie={movie}/>;
                         })}
                     </div>
                 </div>
