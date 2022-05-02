@@ -32,7 +32,7 @@ const Home = () => {
         const data = await fetch(url);
         const movies = await data.json();
         console.log(movies);
-        setPopular(movies.results);
+        setPopular(movies.results.slice(0,6));
     };
 
     const fetchUsers = async () => {
