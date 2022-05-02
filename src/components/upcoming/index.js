@@ -54,7 +54,7 @@ const Home = () => {
     }
 
     return (
-        <div className="App mt-5">
+        <div className="mt-4">
             <div className={'row'}>
                 <div className={'col-9'}>
                     {
