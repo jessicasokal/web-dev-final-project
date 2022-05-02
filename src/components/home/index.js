@@ -64,7 +64,7 @@ const Home = () => {
         } catch (e) {
             console.log(e)
         }
-        navigate('/signin')
+        navigate('/login')
     }
 
     return (
@@ -97,7 +97,7 @@ const Home = () => {
                                 {
                                     !isLoggedIn.LOGGED_IN &&
                                     <button className={'btn btn-primary'}
-                                            onClick={() => navigate('/signin')}>
+                                            onClick={() => navigate('/login')}>
                                         Like
                                     </button>
                                 }

@@ -43,13 +43,13 @@ const NavigationSidebar = () => {
                 <span className="me-3"><i className="fas fa-solid fa-house-chimney"></i></span>
                 <span className="d-none d-xl-block" >Upcoming</span>
             </Link>}
-            <Link to="/signin"
-                  className={`d-flex list-group-item list-group-item-action ${pathname === '/signin' ? 'active' : ''}`}>
+            <Link to="/login"
+                  className={`d-flex list-group-item list-group-item-action ${pathname === '/login' ? 'active' : ''}`}>
                 <span className="me-3"><i className="fas fa-solid fa-house-chimney"></i></span>
                 <span className="d-none d-xl-block">Signin</span>
             </Link>
-            <Link to="/signup"
-                  className={`d-flex list-group-item list-group-item-action ${pathname === '/signup' ? 'active' : ''}`}>
+            <Link to="/register"
+                  className={`d-flex list-group-item list-group-item-action ${pathname === '/register' ? 'active' : ''}`}>
                 <span className="me-3"><i className="fas fa-solid fa-house-chimney"></i></span>
                 <span className="d-none d-xl-block">Signup</span>
             </Link>

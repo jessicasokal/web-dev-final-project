@@ -16,7 +16,7 @@ const Signup = () => {
     const navigate = useNavigate()
     const handleSignupBtn = async () => {
         try {
-            await api.post("http://localhost:4000/api/signup", {
+            await api.post("http://localhost:4000/api/register", {
                 isAdmin: adminRef.current.checked,
                 isWatcher: watcherRef.current.checked,
                 isCreator: creatorRef.current.checked,
@@ -24,7 +24,7 @@ const Signup = () => {
                 username: usernameRef.current.value,
                 password: passwordRef.current.value
             })
-            navigate('/signin')
+            navigate('/login')
         } catch (e) {
             alert('oops')
         }
@@ -33,40 +33,41 @@ const Signup = () => {
         <div className={'row pt-4'}>
             <h1>Signup</h1>
             <div className={'col-4 p-2'}>
-                <label>
+                <h3>User Type</h3>
+                <label className={'pt-4 ps-4'}>
                     <input
                         ref={adminRef}
                         type="radio"
-                        className="form-control"
+                        className="form-check-input"
                         value={'admin'}
                         id={'admin'}
                         name={'typeOfUser'}
                     />
-                    Admin
+                    <span className={'ps-4'}>Admin</span>
                 </label>
-
-                <label>
+                <br/>
+                <label className={'pt-4 ps-4'}>
                     <input
                         ref={watcherRef}
                         type="radio"
-                        className="form-control"
+                        className="form-check-input"
                         value={'watcher'}
                         id={'watcher'}
                         name={'typeOfUser'}
                     />
-                    Movie Watcher
+                    <span className={'ps-4'}>Moderator</span>
                 </label>
-
-                <label>
+                <br/>
+                <label className={'pt-4 ps-4'}>
                     <input
                         ref={creatorRef}
                         type="radio"
-                        className="form-control"
+                        className="form-check-input"
                         value={'creator'}
                         id={'creator'}
                         name={'typeOfUser'}
                     />
-                    Movie Creator
+                    <span className={'ps-4'}>User</span>
                 </label>
 
             </div>
@@ -122,80 +123,3 @@ const Signup = () => {
 };
 
 export default Signup;
-
-/*
-
-                <label>
-                    <input
-                        ref={adminRef}
-                        type="radio"
-                        className="form-control"
-                        value={'admin'}
-                        id={'admin'}
-                        name={'typeOfUser'}
-                    />
-                    Admin
-                </label>
-
-                <label>
-                    <input
-                        ref={watcherRef}
-                        type="radio"
-                        className="form-control"
-                        value={'watcher'}
-                        id={'watcher'}
-                        name={'typeOfUser'}
-                    />
-                    Movie Watcher
-                </label>
-
-                <label>
-                    <input
-                        ref={creatorRef}
-                        type="radio"
-                        className="form-control"
-                        value={'creator'}
-                        id={'creator'}
-                        name={'typeOfUser'}
-                    />
-                    Movie Creator
-                </label>
- */
-
-/*
-
-                <h4>User Type</h4>
-                <select className={'dropdown'}>
-                    <option
-                        ref={adminRef}
-                        type="radio"
-                        className="form-control"
-                        value={'admin'}
-                        id={'admin'}
-                        name={'typeOfUser'}
-                    >
-                        Admin
-                    </option>
-
-                    <option
-                        ref={watcherRef}
-                        type="radio"
-                        className="form-control"
-                        value={'watcher'}
-                        id={'watcher'}
-                        name={'typeOfUser'}>
-                        Movie Watcher
-                    </option>
-
-                    <option
-                            ref={creatorRef}
-                            type="radio"
-                            className="form-control"
-                            value={'creator'}
-                            id={'creator'}
-                            name={'typeOfUser'}
-                            >
-                        Movie Creator
-                    </option>
-                </select>
- */

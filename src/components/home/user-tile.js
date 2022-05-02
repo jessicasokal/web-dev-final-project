@@ -50,7 +50,7 @@ const UserTile = ({user}) => {
                 <button className={'btn btn-primary ms-5'}
                         onClick={() => {
                             if (!isLoggedIn.LOGGED_IN) {
-                                navigate('/signin')
+                                navigate('/login')
                             }
                             else    {
                                 followUser(currentUser, user)

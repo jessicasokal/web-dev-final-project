@@ -3,7 +3,6 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import './profile.css';
 import isLoggedIn from "../../global/variables";
-import FollowingFollowersSidebar from "./following_followers_sizebar";
 import Signout from "../login-registration/signout";
 
 const api = axios.create({
@@ -15,7 +14,7 @@ const Profile = () => {
     const navigate = useNavigate()
 
     if (!isLoggedIn.LOGGED_IN) {
-        navigate('/signin')
+        navigate('/login')
     }
 
     const [currentUser, setCurrentUser] = useState({})
@@ -33,7 +32,7 @@ const Profile = () => {
             const response = await api.post("http://localhost:4000/api/profile")
             setCurrentUser(response.data)
         } catch (e) {
-            navigate('/signin')
+            navigate('/login')
         }
     }
 
@@ -46,7 +45,7 @@ const Profile = () => {
         } catch (e) {
             console.log(e)
         }
-       navigate('/signin')
+       navigate('/login')
     }
 
     const editPassword = async (currentUser) => {
@@ -58,7 +57,7 @@ const Profile = () => {
         } catch (e) {
             console.log(e)
         }
-        navigate('/signin')
+        navigate('/login')
     }
 
 
@@ -140,12 +139,3 @@ const Profile = () => {
 
 export default Profile;
 
-/*
-                <div className={'col-2'}>
-                    {console.log(`CURRENT USER: ${currentUser._id}`)}
-                    <FollowingFollowersSidebar userID={currentUser._id}/>
-                </div>
-
-
-                {JSON.stringify(currentUser)}
- */

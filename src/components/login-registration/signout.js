@@ -9,11 +9,12 @@ const api = axios.create({
 
 const Signout = () => {
     const navigate = useNavigate();
+
     const signout = async () => {
         const response = await api
-            .post(("http://localhost:4000/api/signout"))
+            .post(("http://localhost:4000/api/logout"))
         isLoggedIn.makeFalse();
-        navigate('/signin');
+        navigate('/login');
     }
 
     return (

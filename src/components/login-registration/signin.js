@@ -13,7 +13,7 @@ const Signin = () => {
     const navigate = useNavigate()
     const handleSigninBtn = async () => {
         try {
-            await api.post("http://localhost:4000/api/signin", {
+            await api.post("http://localhost:4000/api/login", {
                 username: usernameRef.current.value,
                 password: passwordRef.current.value
             })

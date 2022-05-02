@@ -7,8 +7,6 @@ import Home from './components/home';
 import Search from './components/search';
 import Signin from "./components/login-registration/signin.js";
 import Signup from "./components/login-registration/signup.js";
-import PrivacyPolicy from "./components/privacy-policy";
-import Results from "./components/search-results/results";
 import Profile from "./components/profile";
 import OtherProfile from "./components/profile/other-profile";
 import Navigation from "./components/navigation"
@@ -31,14 +29,10 @@ function App() {
                                  element={<Search/>}/>
                           <Route path={'upcoming'}
                                  element={<Upcoming/>}/>
-                          <Route path={'signin'}
+                          <Route path={'login'}
                                  element={<Signin/>}/>
-                          <Route path={'signup'}
+                          <Route path={'register'}
                                  element={<Signup/>}/>
-                          <Route path={'results'}
-                                 element={<Results/>}/>
-                          <Route path={'privacy-policy'}
-                                 element={<PrivacyPolicy/>}/>
                           <Route path={'adminonly'}
                                  element={<AdminUse/>}/>
                           <Route path={'details/:id'}
