@@ -2,46 +2,35 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {useLocation} from "react-router-dom";
 
-const api = axios.create({
-    withCredentials: false
-});
-
 const DetailsPage = () => {
     const location = useLocation().pathname;
     const textArray = location.split('/');
     const movieID = textArray[2];
-    console.log(movieID)
-    const [currentMovie, setCurrentMovie] = useState();
+    const [currMovie, setMovie] = useState();
 
     const url =
-        "https://api.themoviedb.org/3/movie/upcoming?api_key=9e019a5736bc48ae537fdcff22fd8a1e&language=en-US&page=1";
+        `https://api.themoviedb.org/3/movie/${movieID}?api_key=9e019a5736bc48ae537fdcff22fd8a1e&language=en-US&page=1`;
 
     useEffect(() => {
-        fetchCurrentMovie();
-    }, []);
+        fetchMovie();
+    });
 
-
-    const fetchCurrentMovie = async () => {
-        try {
-            const response = await api.post(`http://localhost:4000/api/movies`, {
-                imdbID: movieID,
-                comments: [],
-                likes: 0
-            })
-            const res = await api.get(`http://localhost:4000/api/movies/${movieID}`)
-            setCurrentMovie(res.data)
-            console.log(`set movie`)
-
-        } catch (e) {
-
-        }
-
-    }
+    const fetchMovie = async () => {
+        const data = await fetch(url);
+        const movie = await data.json();
+        setMovie(movie)
+        console.log('setting movie')
+    };
 
     return (
         <div className={'row'}>
             <div className={'col-3'}>
-                {currentMovie._id}
+                {currMovie.title}
+                {currMovie.overview}
+                {currMovie.poster_path}
+                {currMovie.release_date}
+                {currMovie.tagline}
+                {currMovie.vote_count}
             </div>
         </div>
     )
