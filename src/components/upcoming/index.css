@@ -15,3 +15,14 @@ img {
 body {
     margin: 5% 5%;
 }
+
+.wd-width {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.wd-smaller-width {
+    width: 80%;
+    justify-self: center;
+    margin-bottom: 20px;
+}

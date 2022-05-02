@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Movie from "./movie";
 import "./index.css";
 import axios from "axios";
@@ -17,6 +17,7 @@ const Home = () => {
     const [users, setUsers] = useState([]);
     const [currentUser, setCurrentUser] = useState({})
     const navigate = useNavigate()
+    const commentRef = useRef();
 
     useEffect(() => {
         fetchPopular();
@@ -61,6 +62,19 @@ const Home = () => {
                 ...currentUser,
                 likedMovies: [...currentUser.likedMovies, liked]
             })
+
+        } catch (e) {
+            console.log(e)
+        }
+        navigate('/login')
+    }
+
+    const comment = async (movie) => {
+        try {
+            await api.put(`http://localhost:4000/api/users/${currentUser._id}`, {
+                ...currentUser,
+                comments: [...currentUser.comments, {comment: commentRef, associatedMovie: movie.id}]
+            })
         } catch (e) {
             console.log(e)
         }
@@ -87,20 +101,48 @@ const Home = () => {
                                 <Link to={`/details/${movie.id}`}>
                                     <Movie key={movie.id} movie={movie} />
                                 </Link>
-                                {
-                                    isLoggedIn.LOGGED_IN &&
-                                        <button className={'btn btn-primary'}
-                                        onClick={() => addLike(movie.id)}>
-                                            Like
-                                        </button>
-                                }
-                                {
-                                    !isLoggedIn.LOGGED_IN &&
-                                    <button className={'btn btn-primary'}
-                                            onClick={() => navigate('/login')}>
-                                        Like
-                                    </button>
-                                }
+                                <div className={'row'}>
+                                    <input className='ms-2 wd-smaller-width'
+                                           placeholder={'Comment'} type={'text'} id={'comment'}/>
+                                    <div className={'row'}>
+                                        <div className={'col-6'}>
+                                            {
+                                                isLoggedIn.LOGGED_IN &&
+                                                <button className={'btn btn-primary wd-width'}
+                                                        onClick={() => addLike(movie.id)}>
+                                                    Like
+                                                </button>
+                                            }
+                                            {
+                                                !isLoggedIn.LOGGED_IN &&
+                                                <button className={'btn btn-primary wd-width'}
+                                                        onClick={() => navigate('/login')}>
+                                                    Like
+                                                </button>
+                                            }
+                                        </div>
+                                        <div className={'col-6'}>
+                                            {
+                                                !isLoggedIn.LOGGED_IN &&
+                                                <button className={'btn btn-secondary wd-width'}
+                                                        onClick={() => navigate('/login')}>
+                                                    Comment
+                                                </button>
+                                            }
+                                            {
+                                                isLoggedIn.LOGGED_IN &&
+                                                <button className={'btn btn-secondary wd-width'}
+                                                        ref={commentRef}
+                                                        onClick={() => comment(movie)}>
+                                                    Comment
+                                                </button>
+                                            }
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
                             </div>
                         })}
                     </div>
