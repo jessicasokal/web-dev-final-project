@@ -13,6 +13,8 @@ import NavigationSidebar from "./components/navigation/navigation-bar";
 import Home from "./components/home/home";
 import GenericProfile from "./components/profile/generic-profile";
 import Details from "./components/details/details";
+import Search from "./components/search";
+import Upcoming from "./components/upcoming";
 
 function App() {
     return (
@@ -37,6 +39,12 @@ function App() {
                                     <Route path="/login" element={<Login/>}/>
                                     <Route path="/register" element={<Register/>}/>
                                     <Route path={'/details/:did'} element={<Details/>}/>
+                                    <Route path={'/search'} element={<Search/>}/>
+                                    <Route path={'/upcoming'} element={
+                                        <SecureRoute>
+                                            <Upcoming/>
+                                        </SecureRoute>
+                                    }/>
                                 </Route>
                             </Routes>
                         </div>

@@ -23,6 +23,14 @@ const NavigationSidebar = () => {
                   className={`d-flex list-group-item list-group-item-action justify-content-center ${pathname === '/profile' ? 'active' : ''}`}>
                 <span className="d-none d-xl-block">Profile</span>
             </Link>
+            <Link to="/search"
+                  className={`d-flex list-group-item list-group-item-action justify-content-center ${pathname === '/search' ? 'active' : ''}`}>
+                <span className="d-none d-xl-block">Search</span>
+            </Link>
+            <Link to="/upcoming"
+                  className={`d-flex list-group-item list-group-item-action justify-content-center ${pathname === '/upcoming' ? 'active' : ''}`}>
+                <span className="d-none d-xl-block">Upcoming</span>
+            </Link>
         </div>
     );
 }

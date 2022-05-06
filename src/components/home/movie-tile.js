@@ -39,7 +39,6 @@ const MovieTile = (imdbMovie) => {
     const handleComment = async () => {
         // only allow commenting if signed in
         if (profile) {
-            console.log(`CURR MOVIE: ${JSON.stringify(currMovie)}`)
             await addComment(currMovie, commentRef.current.value)
             await addToMyComments(profile, currMovie, commentRef.current.value)
         } else {

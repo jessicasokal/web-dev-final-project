@@ -111,11 +111,11 @@ const GenericProfile = () => {
                     </div>
 
                     <div className={'pt-4'}>
-                        <h3>Following</h3>
+                        <h3 className={'mt-2'}>Following</h3>
                         <ul className={'list-group'}>
                             {following.reverse().map((user) => <UserTile user={user}/>)}
                         </ul>
-                        <h3>Followers</h3>
+                        <h3 className={'mt-4'}>Followers</h3>
                         <ul className={'list-group'}>
                             {followers.reverse().map((user) => <UserTile user={user}/>)}
                         </ul>

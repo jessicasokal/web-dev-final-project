@@ -3,7 +3,7 @@ import {useLocation} from "react-router-dom";
 import './index.css';
 import Movie from "./movie";
 import {getUser} from "../../services/user-service";
-import {fetchMovieByIMDBID} from "../../services/movie-service";
+import {createMovieInDatabase, fetchMovieByIMDBID} from "../../services/movie-service";
 
 
 const Details = () => {
@@ -29,7 +29,7 @@ const Details = () => {
 
     // get the movie corresponding to the paths ID
     const fetchOurMovie = async () => {
-        const selectedMovie = await fetchMovieByIMDBID(movieID)
+        const selectedMovie = await createMovieInDatabase(movieID)
         setOurMovie(selectedMovie)
     }
 
