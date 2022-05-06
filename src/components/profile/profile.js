@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useProfile} from "../../contexts/profile-context";
 import {
     findFollowers,
@@ -107,7 +107,9 @@ const Profile = () => {
                     <div className={'p-2 m-2'}>
                         <h4>Liked Movies</h4>
                         {likedMovies.reverse().map((movie) =>
-                            <ProfileMovie movie={movie}/>)}
+                            <Link to={`/details/${movie.imdbID}`}>
+                                <ProfileMovie movie={movie}/>
+                            </Link>)}
                     </div>
                 </div>
 

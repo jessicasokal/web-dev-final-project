@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 
 const ProfileMovie = (movie) => {
     console.log(JSON.stringify(movie.movie))
@@ -23,8 +24,8 @@ const ProfileMovie = (movie) => {
         <div>
             {   imdbMovie &&
                 <div>
-                <h5>{imdbMovie.title}</h5>
-                <img src={"https://image.tmdb.org/t/p/w500" + imdbMovie.backdrop_path} alt={imdbMovie.path} />
+                        <h5>{imdbMovie.title}</h5>
+                        <img src={"https://image.tmdb.org/t/p/w500" + imdbMovie.backdrop_path} alt={imdbMovie.path} />
                 </div>
             }
 

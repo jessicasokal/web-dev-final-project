@@ -3,11 +3,13 @@ import Movie from "./movie";
 import './index.css';
 import {Link} from "react-router-dom";
 import {fetchAllUsers} from "../../services/user-service";
-import {fetchMovieByIMDBID, createMovieInDatabase} from "../../services/movie-service";
 import UserTile from "./user-tile";
 import MovieTile from "./movie-tile";
+import {useProfile} from "../../contexts/profile-context";
+import ProfileMovie from "../profile/profile-movie";
 
 const Home = () => {
+    const {profile} = useProfile()
     const url =
         "https://api.themoviedb.org/3/movie/popular?api_key=9e019a5736bc48ae537fdcff22fd8a1e&language=en-US&page=1";
     const [popular, setPopular] = useState([]);
@@ -53,43 +55,39 @@ const Home = () => {
                     </div>
                 </div>
                 <div className={'col-3 ps-3'}>
+                    { profile &&
+                        <>
+                            <div className={'row'}>
+                                <div className={'col-3'}>
+                                    <img src={'./images/default-user-image.png'} className={'wd-profile-picture'}/>
+                                </div>
+                                <div className={'col-9'}>
+                                    <h2>@{profile.username}</h2>
+                                </div>
+                            </div>
+                            <hr/>
+                            </>
+                    }
+
                     <h3>Recently Joined</h3>
                     <ul className={'list-group'}>
                         {users.reverse().map((user) => <UserTile user={user}/>)}
                     </ul>
+                    {
+                        profile &&
+                        <div className={'mt-3'}>
+                            <hr/>
+                            <h3>Liked Movies</h3>
+                            {profile.likedMovies.reverse().map((movie) =>
+                                <Link to={`/details/${movie.imdbID}`}>
+                                    <ProfileMovie movie={movie}/>
+                                </Link>)}
+                        </div>
+
+                    }
                 </div>
             </div>
         </div>
     );
 };
 export default Home;
-
-/*
-                            createMovie(movie)
-                            const thisMovie = fetchMovie(movie.id)
-                            return <div>
-                                <Link to={`/details/${movie.id}`}>
-                                    <Movie key={movie.id} movie={movie} />
-                                </Link>
-                                <div className={'row'}>
-                                    <input className='ms-2 wd-smaller-width'
-                                           placeholder={'Comment'} type={'text'} id={'comment'}/>
-                                    <div className={'row'}>
-                                        <div className={'col-6'}>
-
-                                                <button className={'btn btn-primary wd-width'}>
-                                                    {thisMovie.likes}
-                                                    Like
-                                                </button>
-                                        </div>
-                                        <div className={'col-6'}>
-                                                <button className={'btn btn-secondary wd-width'}
-                                                        >
-                                                    Comment
-                                                </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
- */
