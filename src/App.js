@@ -13,6 +13,7 @@ import NavigationSidebar from "./components/navigation/navigation-bar";
 import Home from "./components/home/home";
 import GenericProfile from "./components/profile/generic-profile";
 import Details from "./components/details/details";
+import DetailsSearch from "./components/details-search/details"
 import Search from "./components/search";
 import Upcoming from "./components/upcoming";
 import AdminUse from "./components/admin/admin-use";
@@ -41,6 +42,7 @@ function App() {
                                     <Route path="/register" element={<Register/>}/>
                                     <Route path={'/details/:did'} element={<Details/>}/>
                                     <Route path={'/search'} element={<Search/>}/>
+                                    <Route path={'/details-search/:did'} element={<Details/>}/>
                                     <Route path={'/adminuse'} element={<AdminUse/>}/>
                                     <Route path={'/upcoming'} element={
                                         <SecureRoute>

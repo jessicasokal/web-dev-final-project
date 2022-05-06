@@ -7,7 +7,7 @@ const MovieList = (props) => {
         <>
             {props.movies.map((movie) => (
                 <div className='wd-search-image-size'>
-                    <Link to={`/details/${movie.id}`}>
+                    <Link to={`/details-search/${movie.imdbID}`}>
                         <img src={movie.Poster}/>
                     </Link>
                 </div>

@@ -24,6 +24,7 @@ const Search = () => {
     }, [searchValue]);
 
 
+
     return (
         <div>
             <div className='row mt-4 mb-4'>
@@ -35,6 +36,7 @@ const Search = () => {
                     movies={movies}/>
             </div>
         </div>
+
     );
 };
 
