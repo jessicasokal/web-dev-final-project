@@ -25,10 +25,21 @@ export const addLike = async (movie) => {
 }
 
 export const addComment = async (movie, comment, profile) => {
-    console.log(`CURR MOVIE: ${JSON.stringify(movie)} COMMENT: ${JSON.stringify(comment)}`)
     await api.put(`${MOVIE_API}/${movie._id}`, {
         ...movie,
-        comments: [...movie.comments, {comment: comment, profile: profile}]
+        comments: [...movie.comments, {comment: comment, profile_id: profile._id, profile_username: profile.username}]
+    })
+}
+
+export const removeComment = async (movie, comment) => {
+    console.log(movie)
+    console.log(comment.comment)
+    const newComments = movie.comments.filter((c) =>
+        c.comment !== comment.comment)
+    console.log(newComments)
+    await api.put(`${MOVIE_API}/${movie._id}`, {
+        ...movie,
+        comments: newComments
     })
 }
 

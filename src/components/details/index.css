@@ -26,3 +26,15 @@ body {
     text-decoration: none;
     font-size: 20px;
 }
+
+.wd-no-underline {
+    text-decoration: none !important;
+}
+
+.wd-username-comment {
+    color: green;
+}
+
+.wd-button-remove {
+    width: 30%;
+}

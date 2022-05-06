@@ -192,8 +192,6 @@ const Profile = () => {
                         <h3 className={'mt-3'}>Followers</h3>
                         {followers.reverse().map((user) => <UserTile user={user}/>)}
 
-                        <h3 className={'mt-3'}>Comments</h3>
-                        {comments.map((comment) => <CommentTile comment={comment}/>)}
                     </div>
                 </div>
             </div>}

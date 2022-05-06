@@ -1,19 +1,29 @@
-import React, {useState, useEffect} from "react";
-import {useLocation} from "react-router-dom";
+import React, {useState, useEffect, useRef} from "react";
+import {useLocation, useNavigate} from "react-router-dom";
 import './index.css';
-import Movie from "./movie";
-import {getUser} from "../../services/user-service";
-import {createMovieInDatabase, fetchComments, fetchMovieByIMDBID} from "../../services/movie-service";
+import {addToMyComments, addToMyLikes} from "../../services/user-service";
+import {
+    addComment,
+    addLike,
+    createMovieInDatabase,
+    fetchComments,
+    fetchMovieByIMDBID
+} from "../../services/movie-service";
 import DetailsCommentTile from "./details-comment-tile";
+import {useProfile} from "../../contexts/profile-context";
 
 
 const Details = () => {
+    const navigate = useNavigate()
+    const {profile} = useProfile()
     const location = useLocation().pathname;
     const textArray = location.split('/');
     const movieID = textArray[2];
     const [movie, setMovie] = useState([])
     const [ourMovie, setOurMovie] = useState([])
     const [comments, setComments] = useState([])
+    const commentRef = useRef()
+    const [likes, setLikes] = useState(undefined)
 
     const url =
         `https://api.themoviedb.org/3/movie/${movieID}?api_key=9e019a5736bc48ae537fdcff22fd8a1e`;
@@ -25,7 +35,6 @@ const Details = () => {
     const fetchMovie = async () => {
         const data = await fetch(url);
         const movie = await data.json();
-        console.log(`MOVIE: ${JSON.stringify(movie)}`)
         setMovie(movie)
     };
 
@@ -49,6 +58,29 @@ const Details = () => {
         fetchOurMovieComments()
     }, [])
 
+    // allow user to like movie
+    const handleLike = async () => {
+        // only allow liking if signed in
+        if (profile) {
+            const likes = await addLike(ourMovie)
+            setLikes(likes)
+            await addToMyLikes(profile, ourMovie)
+        } else {
+            navigate('/login')
+        }
+    }
+
+    // allow user to comment on movie
+    const handleComment = async () => {
+        // only allow commenting if signed in
+        if (profile) {
+            await addComment(ourMovie, commentRef.current.value, profile)
+            await addToMyComments(profile, ourMovie, commentRef.current.value)
+        } else {
+            navigate('/login')
+        }
+    }
+
     return (
         <div className={'row mt-4'}>
             <div className={'col-5'}>
@@ -58,16 +90,38 @@ const Details = () => {
                 <h1>{movie.title}</h1>
                 <div className={'m-2'}>{movie.overview}</div>
                 <h5 className={'m-2'}>Release date: {movie.release_date}</h5>
-                <h5 className={'m-2'}>Likes: {ourMovie.likes}</h5>
+                <h5 className={'m-2'}>Likes:
+                    {   !likes &&
+                        ourMovie.likes
+                    }
+                    {   likes
+                    }</h5>
 
             </div>
             <h3>Comments</h3>
+            <input className='ms-2'
+                   placeholder={'Comment'}
+                   type={'text'}
+                   id={'comment'}
+                   ref={commentRef}/>
+            <div className={'row mb-4'}>
+                <div className={'col-6 mt-3'}>
+                    <button className={'btn btn-primary wd-width ms-2'}
+                            onClick={handleLike}>
+                        Like
+                    </button>
+                </div>
+                <div className={'col-6 mt-3'}>
+                    <button className={'btn btn-secondary wd-width'}
+                            onClick={handleComment}
+                    >
+                        Comment
+                    </button>
+                </div>
+            </div>
             {comments.map((comment) => {
-                return <DetailsCommentTile comment={comment}/>
+                return <DetailsCommentTile comment={comment} movie={ourMovie}/>
             })}
-
-
-
 
         </div>
 
