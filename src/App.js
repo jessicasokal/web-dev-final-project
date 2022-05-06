@@ -12,6 +12,7 @@ import SecureRoute from "./components/secure/secure-route";
 import NavigationSidebar from "./components/navigation/navigation-bar";
 import Home from "./components/home/home";
 import GenericProfile from "./components/profile/generic-profile";
+import Details from "./components/details/details";
 
 function App() {
     return (
@@ -34,6 +35,7 @@ function App() {
                                     </Route>
                                     <Route path="/login" element={<Login/>}/>
                                     <Route path="/register" element={<Register/>}/>
+                                    <Route path={'/details/:did'} element={<Details/>}/>
                                 </Route>
                             </Routes>
                         </div>
