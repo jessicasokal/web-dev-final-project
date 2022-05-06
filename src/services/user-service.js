@@ -39,6 +39,11 @@ export const findFollowing = async (userID) => {
     return response.data
 }
 
+export const findLiked = async (userID) => {
+    const response = await api.get(`${USER_API}/${userID}/liked`)
+    return response.data
+}
+
 export const findEmail = async (userID) => {
     const response = await api.get(`${USER_API}/${userID}/email`)
     return response.data
@@ -63,4 +68,11 @@ export const editPassword = async (profile, password) => {
         password: password
     })
     return password
+}
+
+export const addToMyLikes = async (profile, movie) => {
+    await api.put(`${USER_API}/${profile._id}`, {
+        ...profile,
+        likedMovies: [...profile.likedMovies, movie]
+    })
 }

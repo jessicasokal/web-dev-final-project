@@ -1,15 +1,26 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {useProfile} from "../../contexts/profile-context";
-import {findFollowers, findFollowing, findEmail, findPassword, editEmail, editPassword} from "../../services/user-service";
+import {
+    findFollowers,
+    findFollowing,
+    findEmail,
+    findPassword,
+    editEmail,
+    editPassword,
+    findLiked
+} from "../../services/user-service";
 import './profile.css';
 import UserTile from "../home/user-tile";
+import Movie from "../home/movie";
+import ProfileMovie from "./profile-movie";
 
 const Profile = () => {
     const navigate = useNavigate()
     const {profile, signout} = useProfile()
     const [followers, setFollowers] = useState([])
     const [following, setFollowing] = useState([])
+    const [likedMovies, setLikedMovies] = useState([])
     const emailRef = useRef()
     const [email, setEmail] = useState([])
     const passwordRef = useRef()
@@ -43,6 +54,16 @@ const Profile = () => {
 
     useEffect(() => {
         findMyFollowing()
+    }, [])
+
+    // finds the likedMovies of the current user
+    const findMyLikedMovies = async () => {
+        const likedMovies = await findLiked(profile._id)
+        setLikedMovies(likedMovies)
+    }
+
+    useEffect(() => {
+        findMyLikedMovies()
     }, [])
 
     // finds the email of the current user
@@ -85,6 +106,8 @@ const Profile = () => {
                 <div className={'col-5 mt-4 wd-background-grey'}>
                     <div className={'p-2 m-2'}>
                         <h4>Liked Movies</h4>
+                        {likedMovies.reverse().map((movie) =>
+                            <ProfileMovie movie={movie}/>)}
                     </div>
                 </div>
 

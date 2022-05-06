@@ -1,10 +1,15 @@
 import React, {useEffect, useState} from "react";
 import {addLike, createMovieInDatabase} from "../../services/movie-service";
+import {useProfile} from "../../contexts/profile-context";
+import {useNavigate} from "react-router-dom";
+import {addToMyLikes} from "../../services/user-service";
 
 
 const MovieTile = (imdbMovie) => {
     const [likes, setLikes] = useState(undefined)
     const [currMovie, setCurrMovie] = useState([])
+    const navigate = useNavigate()
+    const {profile} = useProfile()
 
     // creating a new movie
     const createMovie = async (movie) => {
@@ -18,10 +23,15 @@ const MovieTile = (imdbMovie) => {
 
     // allow user to like movie
     const handleLike = async () => {
-        const likes = await addLike(currMovie)
-        setLikes(likes)
+        // only allow liking if signed in
+        if (profile) {
+            const likes = await addLike(currMovie)
+            setLikes(likes)
+            await addToMyLikes(profile, currMovie)
+        } else {
+            navigate('/login')
+        }
     }
-
 
     return (
         <div>
@@ -37,7 +47,7 @@ const MovieTile = (imdbMovie) => {
                         {
                             likes
                         }
-                        Likes
+                        <span> Likes</span>
                         <button className={'btn btn-primary wd-width ms-2'}
                                 onClick={handleLike}>
                             Like
