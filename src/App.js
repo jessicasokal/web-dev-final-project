@@ -15,6 +15,7 @@ import GenericProfile from "./components/profile/generic-profile";
 import Details from "./components/details/details";
 import Search from "./components/search";
 import Upcoming from "./components/upcoming";
+import AdminUse from "./components/admin/admin-use";
 
 function App() {
     return (
@@ -40,6 +41,7 @@ function App() {
                                     <Route path="/register" element={<Register/>}/>
                                     <Route path={'/details/:did'} element={<Details/>}/>
                                     <Route path={'/search'} element={<Search/>}/>
+                                    <Route path={'/adminuse'} element={<AdminUse/>}/>
                                     <Route path={'/upcoming'} element={
                                         <SecureRoute>
                                             <Upcoming/>

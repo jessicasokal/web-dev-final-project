@@ -39,7 +39,7 @@ const MovieTile = (imdbMovie) => {
     const handleComment = async () => {
         // only allow commenting if signed in
         if (profile) {
-            await addComment(currMovie, commentRef.current.value)
+            await addComment(currMovie, commentRef.current.value, profile)
             await addToMyComments(profile, currMovie, commentRef.current.value)
         } else {
             navigate('/login')
@@ -56,14 +56,6 @@ const MovieTile = (imdbMovie) => {
                        ref={commentRef}/>
                 <div className={'row'}>
                     <div className={'col-6'}>
-                        {
-                            !likes &&
-                            currMovie.likes
-                        }
-                        {
-                            likes
-                        }
-                        <span> Likes</span>
                         <button className={'btn btn-primary wd-width ms-2'}
                                 onClick={handleLike}>
                             Like
@@ -76,6 +68,22 @@ const MovieTile = (imdbMovie) => {
                             Comment
                         </button>
                     </div>
+                    <div className={'row mt-2 ms-4'}>
+                        <div className={'col-1'}>
+                            {
+                                !likes &&
+                                currMovie.likes
+                            }
+                            {
+                                likes
+                            }
+                        </div>
+                        <div className={'col-10'}>
+                            <span>Likes</span>
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
         </div>

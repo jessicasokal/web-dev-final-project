@@ -24,11 +24,11 @@ export const addLike = async (movie) => {
     return movie.likes + 1
 }
 
-export const addComment = async (movie, comment) => {
+export const addComment = async (movie, comment, profile) => {
     console.log(`CURR MOVIE: ${JSON.stringify(movie)} COMMENT: ${JSON.stringify(comment)}`)
     await api.put(`${MOVIE_API}/${movie._id}`, {
         ...movie,
-        comments: [...movie.comments, comment]
+        comments: [...movie.comments, {comment: comment, profile: profile}]
     })
 }
 
@@ -37,11 +37,15 @@ export const fetchLikes = async (movieIMDBID) => {
     return response.data
 }
 
+export const fetchComments = async (movieID) => {
+    const response = await api.get(`${MOVIE_API}/${movieID}/comments`)
+    return response.data
+}
+
 
 export const postComment = async (userId, imdbID, comment) => {
     const response = await api.post(`${MOVIE_API}/${imdbID}/comments/${userId}`, comment)
     return response.data
-    // return comment
 }
 
 export const findCommentsByImdbID = async (imdbID) => {

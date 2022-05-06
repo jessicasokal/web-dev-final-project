@@ -3,7 +3,8 @@ import {useLocation} from "react-router-dom";
 import './index.css';
 import Movie from "./movie";
 import {getUser} from "../../services/user-service";
-import {createMovieInDatabase, fetchMovieByIMDBID} from "../../services/movie-service";
+import {createMovieInDatabase, fetchComments, fetchMovieByIMDBID} from "../../services/movie-service";
+import DetailsCommentTile from "./details-comment-tile";
 
 
 const Details = () => {
@@ -12,6 +13,7 @@ const Details = () => {
     const movieID = textArray[2];
     const [movie, setMovie] = useState([])
     const [ourMovie, setOurMovie] = useState([])
+    const [comments, setComments] = useState([])
 
     const url =
         `https://api.themoviedb.org/3/movie/${movieID}?api_key=9e019a5736bc48ae537fdcff22fd8a1e`;
@@ -37,6 +39,16 @@ const Details = () => {
         fetchOurMovie()
     }, [])
 
+    // get the comments corresponding to the movie
+    const fetchOurMovieComments = async () => {
+        const comments = await fetchComments(movieID)
+        setComments(comments)
+    }
+
+    useEffect(() => {
+        fetchOurMovieComments()
+    }, [])
+
     return (
         <div className={'row mt-4'}>
             <div className={'col-5'}>
@@ -50,6 +62,9 @@ const Details = () => {
 
             </div>
             <h3>Comments</h3>
+            {comments.map((comment) => {
+                return <DetailsCommentTile comment={comment}/>
+            })}
 
 
 
