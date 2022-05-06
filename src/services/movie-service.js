@@ -11,20 +11,25 @@ export const fetchMovieByIMDBID = async (movieIMDBID) => {
 }
 
 export const createMovieInDatabase = async (movieID) => {
-    console.log(`MOVIE ID: ${movieID}`)
     const response = await api.post(`${MOVIE_API}`,
         {imdbID: movieID})
-    console.log(`RESPONSE DATA: ${JSON.stringify(response.data)}`)
     return response.data;
 }
 
 export const addLike = async (movie) => {
-    console.log(`MOVIE ID: ${movie._id}`)
     await api.put(`${MOVIE_API}/${movie._id}`, {
         ...movie,
         likes: movie.likes + 1
     })
     return movie.likes + 1
+}
+
+export const addComment = async (movie, comment) => {
+    console.log(`CURR MOVIE: ${JSON.stringify(movie)} COMMENT: ${JSON.stringify(comment)}`)
+    await api.put(`${MOVIE_API}/${movie._id}`, {
+        ...movie,
+        comments: [...movie.comments, comment]
+    })
 }
 
 export const fetchLikes = async (movieIMDBID) => {

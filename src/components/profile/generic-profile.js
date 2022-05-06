@@ -1,9 +1,17 @@
 import React, {useEffect, useState} from "react";
-import {useLocation} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import './profile.css';
-import {getUser, updateFollowers, updateFollowing, findFollowers, findFollowing} from "../../services/user-service";
+import {
+    getUser,
+    updateFollowers,
+    updateFollowing,
+    findFollowers,
+    findFollowing,
+    findLikedMovies
+} from "../../services/user-service";
 import {useProfile} from "../../contexts/profile-context";
 import UserTile from "../home/user-tile";
+import ProfileMovie from "./profile-movie";
 
 
 const GenericProfile = () => {
@@ -17,6 +25,7 @@ const GenericProfile = () => {
 
     const [followers, setFollowers] = useState([])
     const [following, setFollowing] = useState([])
+    const [likedMovies, setLikedMovies] = useState([])
 
     // get the user corresponding to the paths ID
     const fetchUser = async () => {
@@ -41,12 +50,23 @@ const GenericProfile = () => {
     // set following of user
     const fetchFollowing = async () => {
         const following = await findFollowing(userID)
-        setFollowers(following);
+        setFollowing(following);
     }
 
     useEffect(() => {
-        fetchFollowers();
+        fetchFollowing();
     }, []);
+
+    // set liked movies of user
+    const fetchLikedMovies = async () => {
+        const likedMovies = await findLikedMovies(userID)
+        setLikedMovies(likedMovies);
+    }
+
+    useEffect(() => {
+        fetchLikedMovies();
+    }, []);
+
 
     // handle following users
     const handleFollow = async () => {
@@ -59,6 +79,11 @@ const GenericProfile = () => {
             <div className={'col-5 mt-4 wd-background-grey'}>
                 <div className={'p-2 m-2'}>
                     <h4>Liked Movies</h4>
+                    {likedMovies.map((movie) => {
+                        return <Link to={`/details/${movie.imdbID}`}>
+                            <ProfileMovie movie={movie}/>
+                        </Link>
+                    })}
                 </div>
             </div>
 

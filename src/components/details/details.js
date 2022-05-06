@@ -18,7 +18,6 @@ const Details = () => {
         const data = await fetch(url);
         const movie = await data.json();
         setMovie(movie)
-        console.log('setting movie')
     };
 
     return (

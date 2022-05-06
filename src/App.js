@@ -19,6 +19,7 @@ function App() {
         <ProfileProvider>
                 <BrowserRouter>
                     <div className="container p-5">
+                        <h1>The Movie Review Hub</h1>
                         <NavigationSidebar/>
                         <div>
                             <Routes>

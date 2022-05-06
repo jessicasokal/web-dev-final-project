@@ -29,6 +29,13 @@ export const updateFollowing = async (toFollowUser, followingUser) => {
     })
 }
 
+export const addToMyComments = async (profile, movie, comment) => {
+    await api.put(`${USER_API}/${profile._id}`, {
+        ...profile,
+        comments: [...profile.comments, {movie: movie, comment: comment}]
+    })
+}
+
 export const findFollowers = async (userID) => {
     const response = await api.get(`${USER_API}/${userID}/followers`)
     return response.data
@@ -39,8 +46,18 @@ export const findFollowing = async (userID) => {
     return response.data
 }
 
+export const findLikedMovies = async (userID) => {
+    const response = await api.get(`${USER_API}/${userID}/likedMovies`)
+    return response.data
+}
+
 export const findLiked = async (userID) => {
     const response = await api.get(`${USER_API}/${userID}/liked`)
+    return response.data
+}
+
+export const findComments = async (userID) => {
+    const response = await api.get(`${USER_API}/${userID}/comments`)
     return response.data
 }
 

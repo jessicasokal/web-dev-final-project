@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
 
 const ProfileMovie = (movie) => {
-    console.log(JSON.stringify(movie.movie))
+    //console.log(JSON.stringify(movie.movie))
     const [imdbMovie, setimdbMovie] = useState()
 
     const url =
@@ -12,7 +11,6 @@ const ProfileMovie = (movie) => {
         const data = await fetch(url);
         const movie = await data.json();
         setimdbMovie(movie)
-        console.log('setting movie')
     };
 
     useEffect(() => {

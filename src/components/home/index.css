@@ -26,3 +26,8 @@ body {
     text-decoration: none;
     font-size: 20px;
 }
+
+.wd-smaller-width {
+    width: 80%;
+}
+

@@ -8,12 +8,13 @@ import {
     findPassword,
     editEmail,
     editPassword,
-    findLiked
+    findLiked, findComments
 } from "../../services/user-service";
 import './profile.css';
 import UserTile from "../home/user-tile";
 import Movie from "../home/movie";
 import ProfileMovie from "./profile-movie";
+import CommentTile from "./comment-tile";
 
 const Profile = () => {
     const navigate = useNavigate()
@@ -25,6 +26,7 @@ const Profile = () => {
     const [email, setEmail] = useState([])
     const passwordRef = useRef()
     const [password, setPassword] = useState([])
+    const [comments, setComments] = useState([])
 
     // logs the current user out of their account
     const logout = async () => {
@@ -66,6 +68,16 @@ const Profile = () => {
         findMyLikedMovies()
     }, [])
 
+    // finds the comments of the current user
+    const findMyComments = async () => {
+        const myComments = await findComments(profile._id)
+        setComments(myComments)
+    }
+
+    useEffect(() => {
+        findMyComments()
+    }, [])
+
     // finds the email of the current user
     const findMyEmail = async () => {
         const email = await findEmail(profile._id)
@@ -97,7 +109,6 @@ const Profile = () => {
         const password = await editPassword(profile, passwordRef.current.value)
         setPassword(password)
     }
-
 
     return (<>
             {
@@ -174,12 +185,15 @@ const Profile = () => {
                     </div>
 
                     <div className={'p-2 m-2 pt-4'}>
-                        <h3>Following</h3>
+                        <h3 className={'mt-3'}>Following</h3>
 
                         {following.reverse().map((user) => <UserTile user={user}/>)}
 
-                        <h3>Followers</h3>
+                        <h3 className={'mt-3'}>Followers</h3>
                         {followers.reverse().map((user) => <UserTile user={user}/>)}
+
+                        <h3 className={'mt-3'}>Comments</h3>
+                        {comments.map((comment) => <CommentTile comment={comment}/>)}
                     </div>
                 </div>
             </div>}
