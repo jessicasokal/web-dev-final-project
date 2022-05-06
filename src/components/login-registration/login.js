@@ -1,31 +1,27 @@
 import React, {useRef} from 'react';
-import axios from "axios";
-import {useNavigate} from "react-router-dom";
-import isLoggedIn from "../../global/variables";
+import {Link, useNavigate} from "react-router-dom";
+import {useProfile} from "../../contexts/profile-context.js";
 
-const api = axios.create({
-    withCredentials: true
-});
-
-const Signin = () => {
+const Login = () => {
     const usernameRef = useRef()
     const passwordRef = useRef()
     const navigate = useNavigate()
+    const {signin} = useProfile()
+
     const handleSigninBtn = async () => {
         try {
-            await api.post("http://localhost:4000/api/login", {
-                username: usernameRef.current.value,
-                password: passwordRef.current.value
-            })
-            isLoggedIn.makeTrue();
+            await signin(
+                usernameRef.current.value,
+                passwordRef.current.value
+            )
             navigate('/profile')
         } catch (e) {
-            alert(e)
+            alert('Incorrect username or password')
         }
     }
     return (
         <div className={'pt-4'}>
-            <h1>Signin</h1>
+            <h1>Login</h1>
             <input
                 ref={usernameRef}
                 placeholder="username"
@@ -47,4 +43,4 @@ const Signin = () => {
     );
 };
 
-export default Signin;
+export default Login;

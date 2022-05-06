@@ -1,27 +1,27 @@
-.wd_profile_photo {
-    border-radius: 50%;
-    height: 100px;
-    width: 100px;
+.wd-background-grey {
+    background-color: rgb(32,32,32);
 }
 
-.wd_username {
+.wd-username {
     font-weight: bold;
     font-size: 37px;
 }
 
-.wd_small {
-    width: 100px;
+.wd-bold {
+    font-weight: bold;
+    font-size: 20px;
 }
 
-.wd_sidebar {
+.wd-header-username {
+    font-weight: bold;
+    font-size: 50px;
+}
+
+.wd-contact-text {
     font-weight: bold;
     font-size: 30px;
 }
 
-.wd_bold {
-    font-weight: bold;
-}
-
-.wd-background-grey {
-    border-color: grey;
+.wd-email {
+    font-size: 30px;
 }
